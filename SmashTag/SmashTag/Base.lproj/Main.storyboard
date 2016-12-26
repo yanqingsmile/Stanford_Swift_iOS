@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="oYL-Kp-3ps">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="oYL-Kp-3ps">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <textField key="tableHeaderView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Twitter Text" textAlignment="natural" minimumFontSize="17" id="nvs-Km-O0c">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                            <rect key="frame" x="0.0" y="64" width="375" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -209,11 +209,11 @@
             </objects>
             <point key="canvasLocation" x="5018.3999999999996" y="-261.31934032983509"/>
         </scene>
-        <!--Search-->
+        <!--Navigation Controller-->
         <scene sceneID="b88-1l-ld5">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GrC-fc-dtj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" id="LbS-aQ-F3U"/>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="LbS-aQ-F3U"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="y8I-MS-i1o">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -241,11 +241,11 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vg0-SG-HLp" id="8g0-FS-mb5">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="65.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jpq-jD-QCh">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="65"/>
+                                            <rect key="frame" x="15" y="0.0" width="345" height="65.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -275,6 +275,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="oYL-Kp-3ps" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="L4A-ul-o7y">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
@@ -287,11 +288,11 @@
             </objects>
             <point key="canvasLocation" x="1100" y="-192.05397301349328"/>
         </scene>
-        <!--Recent-->
+        <!--Navigation Controller-->
         <scene sceneID="YqN-5K-TVb">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="r8I-Md-xaG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Recent" id="PwO-fZ-vFu"/>
+                    <tabBarItem key="tabBarItem" systemItem="mostRecent" id="PwO-fZ-vFu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4pl-M6-YDm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -308,6 +309,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="flh-pe-YMF"/>
+        <segue reference="R9C-Oq-XPB"/>
     </inferredMetricsTieBreakers>
 </document>
