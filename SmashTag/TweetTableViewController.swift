@@ -23,7 +23,8 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         didSet {
             tweets.removeAll()
             searchForTweets()
-            title = searchText
+            navigationItem.title = searchText
+            
             if searchedTexts.count >= 6 {
                 searchedTexts.remove(at: searchedTexts.count - 1)
             }
