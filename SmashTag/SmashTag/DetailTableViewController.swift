@@ -41,7 +41,7 @@ class DetailTableViewController: UITableViewController {
         case SectionContent.urls.rawValue:
             return (tweet?.urls.count)!
         case SectionContent.users.rawValue:
-            return (tweet?.userMentions.count)!
+            return (tweet?.userMentions.count)! + 1 // plus the user who posted the tweet
         default:
             return 0
         }
@@ -97,7 +97,12 @@ class DetailTableViewController: UITableViewController {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: StoryBoard.textCellIdentifier, for: indexPath)
-            cell.textLabel?.text = textCellDictionary[indexPath.section]??[indexPath.row].keyword
+            if indexPath.section == SectionContent.users.rawValue {
+                cell.textLabel?.text = indexPath.row == 0 ? tweet?.user.description: textCellDictionary[indexPath.section]??[indexPath.row - 1].keyword
+            }
+            else {
+                cell.textLabel?.text = textCellDictionary[indexPath.section]??[indexPath.row].keyword
+            }
             return cell
         }
     }

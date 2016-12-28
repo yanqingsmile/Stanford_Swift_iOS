@@ -25,7 +25,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
             searchForTweets()
             navigationItem.title = searchText
             
-            if searchedTexts.count >= 6 {
+            if searchedTexts.count >= 100 {
                 searchedTexts.remove(at: searchedTexts.count - 1)
             }
             searchedTexts.insert(searchText, at: 0)
