@@ -98,7 +98,7 @@ class DetailTableViewController: UITableViewController {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: StoryBoard.textCellIdentifier, for: indexPath)
             if indexPath.section == SectionContent.users.rawValue {
-                cell.textLabel?.text = indexPath.row == 0 ? tweet?.user.description: textCellDictionary[indexPath.section]??[indexPath.row - 1].keyword
+                cell.textLabel?.text = indexPath.row == 0 ? "@\(tweet!.user.screenName)": textCellDictionary[indexPath.section]??[indexPath.row - 1].keyword
             }
             else {
                 cell.textLabel?.text = textCellDictionary[indexPath.section]??[indexPath.row].keyword
