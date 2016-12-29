@@ -19,7 +19,7 @@ class DetailTableViewController: UITableViewController {
         self.title = "Tweet detail"
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
-        print(tweet)
+        print(tweet!)
     }
 
 
