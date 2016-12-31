@@ -15,7 +15,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         static let TweetCellIdentifier = "Tweet"
     }
     
-    private struct ConstantString {
+    struct ConstantString {
         static let defaultSearchText = "#stanford"
         static let userDefaultsKey = "searchedTexts"
     }

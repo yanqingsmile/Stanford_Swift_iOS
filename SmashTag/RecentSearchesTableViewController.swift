@@ -11,7 +11,7 @@ import UIKit
 class RecentSearchesTableViewController: UITableViewController {
     
     var searchedTexts: [String?]? {
-        return UserDefaults.standard.object(forKey: "searchedTexts") as? [String?]
+        return UserDefaults.standard.object(forKey: TweetTableViewController.ConstantString.userDefaultsKey) as? [String?]
     }
 
     override func viewDidLoad() {
@@ -57,6 +57,15 @@ class RecentSearchesTableViewController: UITableViewController {
             let selectedString = tableView.cellForRow(at: indexPath)?.textLabel?.text
             tweetTableVC.searchText = selectedString
             navigationController?.pushViewController(tweetTableVC, animated: true)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            var searchedList = UserDefaults.standard.object(forKey: TweetTableViewController.ConstantString.userDefaultsKey) as! [String?]
+            searchedList.remove(at: indexPath.row)
+            UserDefaults.standard.set(searchedList, forKey: TweetTableViewController.ConstantString.userDefaultsKey)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
