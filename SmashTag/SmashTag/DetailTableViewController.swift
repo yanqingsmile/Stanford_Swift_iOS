@@ -8,6 +8,7 @@
 
 import UIKit
 import Twitter
+import SafariServices
 
 class DetailTableViewController: UITableViewController {
     
@@ -20,6 +21,8 @@ class DetailTableViewController: UITableViewController {
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         print(tweet!)
+        addBackToRootButton()
+    
     }
 
 
@@ -72,13 +75,18 @@ class DetailTableViewController: UITableViewController {
         let selectedCell = tableView.cellForRow(at: indexPath)
         if indexPath.section == SectionContent.urls.rawValue {
             let url = URL(string: (selectedCell?.textLabel?.text)!)
-            UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+            openURLInSafari(url!)
             tableView.deselectRow(at: indexPath, animated: true)
         } else if indexPath.section == SectionContent.image.rawValue {
             // do nothing, storyboard segue
         } else {
             performSegue(withIdentifier: "searchTweetSegue", sender: selectedCell)
         }
+    }
+    
+    func openURLInSafari(_ url: URL) {
+        let sfSafariVC = SFSafariViewController(url: url)
+        present(sfSafariVC, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

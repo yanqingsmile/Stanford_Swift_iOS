@@ -19,11 +19,9 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         title = "Tweet Image"
         updateUI()
-
-        
+        addBackToRootButton()
     }
     
     private func updateUI() {

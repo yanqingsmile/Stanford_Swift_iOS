@@ -10,7 +10,17 @@ import UIKit
 import Twitter
 
 class TweetTableViewController: UITableViewController, UITextFieldDelegate {
+    // MARK: - constants
+    private struct StoryBoard {
+        static let TweetCellIdentifier = "Tweet"
+    }
     
+    private struct ConstantString {
+        static let defaultSearchText = "#stanford"
+        static let userDefaultsKey = "searchedTexts"
+    }
+    
+    // MARK: - properties
     var tweets = [Array<Twitter.Tweet>]() {
         didSet {
             tableView.reloadData()
@@ -48,6 +58,14 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     
     private var lastTwitterRequest: Twitter.Request?
     
+    @IBOutlet weak var searchTextField: UITextField! {
+        didSet {
+            searchTextField.delegate = self
+            searchTextField.text = searchText
+        }
+    }
+    
+    // MARK: - private functions
     private func searchForTweets() {
         if let request = twitterRequest {
             lastTwitterRequest = request
@@ -61,9 +79,11 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
                 }
             })
         }
-        
     }
+    
+    
 
+    // MARK: - view controller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = tableView.rowHeight
@@ -73,6 +93,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
             searchedTexts.remove(at: 0)
             UserDefaults.standard.set(searchedTexts, forKey: ConstantString.userDefaultsKey)
         }
+        addBackToRootButton()
     }
 
     
@@ -88,16 +109,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         return tweets[section].count
     }
     
-    private struct StoryBoard {
-        static let TweetCellIdentifier = "Tweet"
-    }
-    
-    private struct ConstantString {
-        static let defaultSearchText = "#stanford"
-        static let userDefaultsKey = "searchedTexts"
-    }
-
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: StoryBoard.TweetCellIdentifier, for: indexPath)
         let tweet = tweets[indexPath.section][indexPath.row]
@@ -106,36 +117,37 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         }
         return cell
     }
-
-    @IBOutlet weak var searchTextField: UITextField! {
-        didSet {
-            searchTextField.delegate = self
-            searchTextField.text = searchText
-        }
-    }
     
+    // MARK: - UITextFieldDelegate methods
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         searchText = textField.text
         return true
     }
     
-
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
+        
         let tweetDetailViewController = segue.destination as! DetailTableViewController
         if let selectedTweetCell = sender as? TweetTableViewCell {
             let indexPath = tableView.indexPath(for: selectedTweetCell)
             let selectedTweet = tweets[(indexPath?.section)!][(indexPath?.row)!]
             tweetDetailViewController.tweet = selectedTweet
         }
-        
-        // Pass the selected object to the new view controller.
+    }
+}
+
+extension UIViewController {
+    func addBackToRootButton() {
+        if let navController = self.navigationController, navController.viewControllers.count > 1 {
+            let item = UIBarButtonItem(barButtonSystemItem: .rewind, target: self, action: #selector(barButtonClicked))
+            navigationItem.rightBarButtonItem = item
+        }
     }
     
-
+    @objc func barButtonClicked() {
+        _ = navigationController?.popToRootViewController(animated: true)
+    }
 }
