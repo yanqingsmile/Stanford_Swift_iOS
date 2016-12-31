@@ -52,7 +52,15 @@ class RecentSearchesTableViewController: UITableViewController {
     }
     
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let tweetTableVC = storyboard?.instantiateViewController(withIdentifier: "TweetTableViewController") as? TweetTableViewController {
+            let selectedString = tableView.cellForRow(at: indexPath)?.textLabel?.text
+            tweetTableVC.searchText = selectedString
+            navigationController?.pushViewController(tweetTableVC, animated: true)
+        }
+    }
     
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -63,4 +71,5 @@ class RecentSearchesTableViewController: UITableViewController {
         let selectedString = (sender as? UITableViewCell)?.textLabel?.text
         tweetTableViewController.searchText = selectedString
     }
+ */
 }

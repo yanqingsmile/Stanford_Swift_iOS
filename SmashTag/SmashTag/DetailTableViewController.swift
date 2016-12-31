@@ -80,7 +80,9 @@ class DetailTableViewController: UITableViewController {
         } else if indexPath.section == SectionContent.image.rawValue {
             // do nothing, storyboard segue
         } else {
-            performSegue(withIdentifier: "searchTweetSegue", sender: selectedCell)
+            if let tweetTableViewController = storyboard?.instantiateViewController(withIdentifier: "TweetTableViewController") {
+                navigationController?.pushViewController(tweetTableViewController, animated: true)
+            }
         }
     }
     

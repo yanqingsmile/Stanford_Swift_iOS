@@ -13,7 +13,7 @@
         <!--Tweet Table View Controller-->
         <scene sceneID="9Ig-z2-EIj">
             <objects>
-                <tableViewController id="PXm-6Q-aS0" customClass="TweetTableViewController" customModule="SmashTag" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TweetTableViewController" id="PXm-6Q-aS0" customClass="TweetTableViewController" customModule="SmashTag" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="189" sectionHeaderHeight="28" sectionFooterHeight="28" id="GnT-V7-tjG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,7 +109,7 @@
         <!--Detail Table View Controller-->
         <scene sceneID="8Ir-Iq-Jgt">
             <objects>
-                <tableViewController id="uoN-k1-SAo" customClass="DetailTableViewController" customModule="SmashTag" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="DetailTableViewController" id="uoN-k1-SAo" customClass="DetailTableViewController" customModule="SmashTag" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="81" sectionHeaderHeight="28" sectionFooterHeight="28" id="1gl-dm-d6Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -162,9 +162,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="F2B-zn-d6w"/>
-                    <connections>
-                        <segue destination="PXm-6Q-aS0" kind="show" identifier="searchTweetSegue" id="3Rb-8t-k5J"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yjd-Li-XTE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -182,11 +179,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZVM-tf-U3f">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZVM-tf-U3f">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HEa-IW-AFo">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -207,7 +204,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ksW-Cr-bN2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4775" y="-192"/>
+            <point key="canvasLocation" x="4773.6000000000004" y="-192.05397301349328"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="b88-1l-ld5">
@@ -253,9 +250,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="PXm-6Q-aS0" kind="show" identifier="searchBack" id="flh-pe-YMF"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -308,7 +302,4 @@
             <point key="canvasLocation" x="2037.5999999999999" y="580.65967016491754"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="3Rb-8t-k5J"/>
-    </inferredMetricsTieBreakers>
 </document>
