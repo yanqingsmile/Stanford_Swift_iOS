@@ -61,10 +61,10 @@ class TweetTableViewCell: UITableViewCell {
             tweetScreenNameLabel?.text = "\(tweet.user)" // tweet.user.description
             
             if let profileImageURL = tweet.user.profileImageURL {
-                DispatchQueue.global(qos: .default).async {
+                DispatchQueue.global(qos: .default).async {[weak weakSelf = self] in
                     if let imageData = NSData(contentsOf: profileImageURL) {
                         DispatchQueue.main.async {
-                            self.tweetProfileImageView?.image = UIImage(data: imageData as Data)
+                            weakSelf?.tweetProfileImageView?.image = UIImage(data: imageData as Data)
                         }
                     }
                 }

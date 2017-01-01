@@ -12,9 +12,9 @@ import SafariServices
 
 class DetailTableViewController: UITableViewController {
     
-        
+    
     var tweet: Twitter.Tweet?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Tweet detail"
@@ -22,18 +22,18 @@ class DetailTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         print(tweet!)
         addBackToRootButton()
-    
+        
     }
-
-
-
+    
+    
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 4
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         switch section {
@@ -70,7 +70,7 @@ class DetailTableViewController: UITableViewController {
             ]
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell = tableView.cellForRow(at: indexPath)
         if indexPath.section == SectionContent.urls.rawValue {
@@ -96,15 +96,25 @@ class DetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == SectionContent.image.rawValue {
             let cell = tableView.dequeueReusableCell(withIdentifier: StoryBoard.imageCellIdentifier, for: indexPath) as! ImageTableViewCell
+            
             if let tweetImageUrl = tweet?.media[indexPath.row].url {
-                DispatchQueue.global(qos: .default).async {
-                    if let imageData = NSData(contentsOf: tweetImageUrl) {
-                        DispatchQueue.main.async {
-                            cell.tweetImageView?.image = UIImage(data: imageData as Data)
-                            tableView.reloadData()
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                if let image = appDelegate.cache.object(forKey: tweetImageUrl as NSURL) {
+                    cell.tweetImageView?.image = image
+                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                } else {
+                    DispatchQueue.global(qos: .default).async {
+                        if let imageData = NSData(contentsOf: tweetImageUrl) {
+                            let downloadedImage = UIImage(data: imageData as Data)
+                            self.saveImageToCache(image: downloadedImage!, fromURL: tweetImageUrl)
+                            DispatchQueue.main.async {
+                                cell.tweetImageView?.image = downloadedImage
+                                tableView.reloadRows(at: [indexPath], with: .automatic)
+                            }
                         }
                     }
                 }
+                
             }
             return cell
         } else {
@@ -116,6 +126,14 @@ class DetailTableViewController: UITableViewController {
                 cell.textLabel?.text = textCellDictionary[indexPath.section]??[indexPath.row].keyword
             }
             return cell
+        }
+    }
+    
+    private func saveImageToCache(image: UIImage, fromURL url: URL) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let imageNSURL = url as NSURL
+        if appDelegate.cache.object(forKey: imageNSURL) == nil {
+            appDelegate.cache.setObject(image, forKey: imageNSURL)
         }
     }
     
@@ -152,11 +170,11 @@ class DetailTableViewController: UITableViewController {
         }
         return nil
     }
-
-
+    
+    
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == StoryBoard.searchTweetSegue {
