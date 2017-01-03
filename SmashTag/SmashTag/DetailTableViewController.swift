@@ -9,6 +9,7 @@
 import UIKit
 import Twitter
 import SafariServices
+import SDWebImage
 
 class DetailTableViewController: UITableViewController {
     
@@ -98,6 +99,8 @@ class DetailTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: StoryBoard.imageCellIdentifier, for: indexPath) as! ImageTableViewCell
             
             if let tweetImageUrl = tweet?.media[indexPath.row].url {
+                /*
+                 // Use cache and GCD to download and set cell image view
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 if let image = appDelegate.cache.object(forKey: tweetImageUrl as NSURL) {
                     cell.tweetImageView?.image = image
@@ -114,7 +117,9 @@ class DetailTableViewController: UITableViewController {
                         }
                     }
                 }
-                
+                */
+                // use SDWebImage library to download and set cell image view
+                cell.tweetImageView?.sd_setImage(with: tweetImageUrl, placeholderImage:UIImage(named:"placeholder.png"))
             }
             return cell
         } else {

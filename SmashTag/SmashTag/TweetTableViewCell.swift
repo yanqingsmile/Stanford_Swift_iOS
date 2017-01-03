@@ -61,6 +61,9 @@ class TweetTableViewCell: UITableViewCell {
             tweetScreenNameLabel?.text = "\(tweet.user)" // tweet.user.description
             
             if let profileImageURL = tweet.user.profileImageURL {
+                
+                /*
+                 // Use GCD to download image and set image view
                 DispatchQueue.global(qos: .default).async {[weak weakSelf = self] in
                     if let imageData = NSData(contentsOf: profileImageURL) {
                         DispatchQueue.main.async {
@@ -68,6 +71,9 @@ class TweetTableViewCell: UITableViewCell {
                         }
                     }
                 }
+                 */
+                // Use SDWebImage to download image and set image view
+                tweetProfileImageView?.sd_setImage(with: profileImageURL, placeholderImage: UIImage(named: "placeholder.png"))
             }
             
             let formatter = DateFormatter()
